@@ -1,9 +1,5 @@
 // Калькулятор с отменой последней операции
 //
-// Инструкция по использованию платформы
-//
-//
-//
 // В обычный калькулятор без логирования добавьте возможность
 // отменить последнюю операцию.
 //
@@ -29,10 +25,37 @@
 // // 6.0
 
 /** Calculator */
+import java.util.LinkedList;
 public class Calculator {
 
-  public int calculate(char op, int a, int b) {
-    int result = null;
+  private LinkedList<Integer> stackOperation = new LinkedList<>();
+
+  public float calculate(char op, int a, int b) {
+    float result = stackOperation.size()>=2? stackOperation.size()-2:0;
+    switch (op) {
+      case "+":
+        result = a + b;
+        stackOperation.add(result);
+        break;
+      case "-":
+        result = a - b;
+        stackOperation.add(result);
+        break;
+      case "*":
+        result = a*b;
+        stackOperation.add(result);
+        break;
+      case "/":
+        result = a / b;
+        stackOperation.add(result);
+        break;
+      case "<":
+        stackOperation.removeLast();
+        break;
+    
+      default:
+        break;
+    }
     return result;
   }
 
@@ -60,11 +83,11 @@ public class Calculator {
     }
 
     Calculator calculator = new Calculator();
-    int result = calculator.calculate(op, a, b);
+    float result = calculator.calculate(op, a, b);
     System.out.println(result);
-    int result2 = calculator.calculate(op2, c, d);
+    float result2 = calculator.calculate(op2, c, d);
     System.out.println(result2);
-    int prevResult = calculator.calculate(undo, 0, 0);
+    float prevResult = calculator.calculate(undo, 0, 0);
     System.out.println(prevResult);
   }
 }
