@@ -26,33 +26,34 @@
 
 /** Calculator */
 import java.util.LinkedList;
+
 public class Calculator {
 
   private LinkedList<Integer> stackOperation = new LinkedList<>();
 
-  public float calculate(char op, int a, int b) {
-    float result = stackOperation.size()>=2? stackOperation.size()-2:0;
+  public int calculate(char op, int a, int b) {
+    int result = stackOperation.size() >= 2 ? stackOperation.size() - 2 : 0;
     switch (op) {
-      case "+":
+      case '+':
         result = a + b;
         stackOperation.add(result);
         break;
-      case "-":
+      case '-':
         result = a - b;
         stackOperation.add(result);
         break;
-      case "*":
-        result = a*b;
+      case '*':
+        result = a * b;
         stackOperation.add(result);
         break;
-      case "/":
+      case '/':
         result = a / b;
         stackOperation.add(result);
         break;
-      case "<":
+      case '<':
         stackOperation.removeLast();
         break;
-    
+
       default:
         break;
     }
