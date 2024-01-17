@@ -45,18 +45,18 @@ class HeapSort {
     int leftIndex = 2 * rootIndex + 1; // левый индекс
     int rightIndex = 2 * rootIndex + 2; // правый индекс
     // находим индекс максимального элемента в поддереве
-    if (left < n && tree[leftIndex] > tree[maxElementIndex])
+    if (leftIndex < sortLength && tree[leftIndex] > tree[maxElementIndex])
       maxElementIndex = leftIndex;
-    if (right < n && tree[rightIndex] > tree[maxElementIndex])
+    if (rightIndex < sortLength && tree[rightIndex] > tree[maxElementIndex])
       maxElementIndex = rightIndex;
     // Переносим в корень максимальный элемент
     if (maxElementIndex != rootIndex) {
       int swap = tree[rootIndex];
       tree[rootIndex] = tree[maxElementIndex];
       tree[maxElementIndex] = swap;
+      buildTree(tree, sortLength, maxElementIndex);
     }
-    // Рекурсия
-    buildTree(tree, sortLength, maxElementIndex);
+
   }
 
   public static void heapSort(int[] sortArray, int sortLength) {
@@ -65,17 +65,22 @@ class HeapSort {
     for (int i = sortLength/2-1;i>=0;i--)
       buildTree(sortArray, sortLength, i);
 
-    //Извлекаем из элементы из дерева с конца
+    //Извлекаем элементы из дерева с конца кучи
     for (int i=sortLength-1;i>=0;i--){
-      int swap = 
+      // Перемещаем корень в конец кучи
+      int swap = sortArray[0];
+      sortArray[0] = sortArray[i];
+      sortArray[i] = swap;
+      buildTree(sortArray,i,0);
     }
+
   }
 
   public static void main(String[] args) {
     int[] initArray;
 
     if (args.length == 0) {
-      initArray = new int[] { 17, 32, 1, 4, 25, 17, 0, 3, 10, 7, 64, 1 };
+      initArray = new int[] { 17, 32, 1, 4, 25, 17, 0, 3, 10, 7, 64, 1, -5, -4};
     } else {
       initArray = Arrays.stream(args[0].split(" ")).mapToInt(Integer::parseInt).toArray();
     }
