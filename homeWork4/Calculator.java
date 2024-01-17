@@ -25,33 +25,35 @@
 // // 6.0
 
 /** Calculator */
-import java.util.LinkedList;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Calculator {
 
-  private LinkedList<Integer> stackOperation = new LinkedList<>();
+  private Deque<Integer> stackOperation = new ArrayDeque<>();
 
   public int calculate(char op, int a, int b) {
-    int result = stackOperation.size() >= 2 ? stackOperation.size() - 2 : 0;
+    int result = 0;
     switch (op) {
       case '+':
         result = a + b;
-        stackOperation.add(result);
+        stackOperation.addLast(result);
         break;
       case '-':
         result = a - b;
-        stackOperation.add(result);
+        stackOperation.addLast(result);
         break;
       case '*':
         result = a * b;
-        stackOperation.add(result);
+        stackOperation.addLast(result);
         break;
       case '/':
         result = a / b;
-        stackOperation.add(result);
+        stackOperation.addLast(result);
         break;
       case '<':
         stackOperation.removeLast();
+        result = stackOperation.getLast();
         break;
 
       default:
