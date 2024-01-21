@@ -16,6 +16,7 @@
 // - Отфильтровать ноутбуки их первоначального множества и вывести проходящие по
 // условиям.
 
+import java.util.Map;
 import java.util.Objects;
 
 /** Notebook */
@@ -106,6 +107,49 @@ public class Notebook {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  public boolean isFiltered(Filter filter){
+    Map<Integer, String> mapFilter = filter.getFilter();
+    boolean result = true;
+    String parameter = "";
+    int intParameter = 0;
+    if (filter.getFilter().size()==0) return result;
+    for (int i=1;i<10;i++){
+      if (mapFilter.containsKey(i)){
+        parameter = mapFilter.get(i);
+        switch (i){
+          case 1:
+            result = result && this.manufacturer.toLowerCase().equals(parameter.toLowerCase());
+            break;
+          case 2:
+            result = result && this.typeRAM.toLowerCase().equals(parameter.toLowerCase());
+            break;
+          case 3:
+            intParameter = Integer.parseInt(parameter);
+            result = result && (this.ramAmount >= intParameter);
+            break;
+          case 4:
+            result = result && this.driveType.toLowerCase().equals(parameter.toLowerCase());
+            break;
+          case 5:
+            intParameter = Integer.parseInt(parameter);
+            result = result && (this.capacityHDD >= intParameter);
+            break;
+          case 6:
+            result = result && this.typeOS.toLowerCase().equals(parameter.toLowerCase());
+            break;
+          case 7:
+            double screenDiagonal = Double.parseDouble(parameter);
+            result = result && (this.screenSize >= screenDiagonal);
+            break;
+          default:
+            break;
+        }
+
+      }
+    }
+    return result;
   }
 
   @Override
