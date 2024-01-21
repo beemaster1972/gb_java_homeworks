@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Filter {
     private Map<Integer, String> filter = new HashMap<>();
-    public String reString = "^\\d\\.[a-zA-Z0-9]+{1,9}";
+    public String reString = "^\\d:[a-zA-Z0-9]+{1,9}";
 
     public Filter(Map<Integer, String> filter) {
         this.filter = filter;
@@ -20,7 +20,7 @@ public class Filter {
         Pattern pattern = Pattern.compile(reString);
         Matcher matcher = pattern.matcher(rawData);
         if (matcher.find()) {
-            rawFilter = rawData.split("\\.");
+            rawFilter = rawData.split(":");
             for (int i = 0; i <= rawFilter.length - 2; i += 2) {
                 num = Integer.parseInt(rawFilter[i]);
                 parameter = rawFilter[i + 1];

@@ -41,9 +41,9 @@ public class Store {
 
     private static String[] getFilterParameter(String rawData) {
         String[] result = new String[2];
-        Pattern pattern = Pattern.compile("^\\d\\..");
+        Pattern pattern = Pattern.compile("^\\d:.");
         if (pattern.matcher(rawData).find()) {
-            result = rawData.split("\\.");
+            result = rawData.split(":");
         } else {
             result = new String[]{"0", ""};
         }
@@ -55,7 +55,7 @@ public class Store {
         String prompt =
                 String.format(
                         "Введите параметры фильтра.%n"
-                                + "Например:%n 1.Acer или 3.16%n"
+                                + "Например:%n 1:Acer или 3:16%n"
                                 + "Для числовых параметров (объем ОЗУ, объем накопителя, диагональ экрана)%n"
                                 + "фильтр будет >=%n"
                                 + "Чтобы закончить ввод фильтра введите 0.%n"
@@ -122,7 +122,7 @@ public class Store {
 
 
         filter = new Filter(getFilter());
-        Filter filter1 = new Filter("1.Hewlett Packard");
+        Filter filter1 = new Filter("1:Hewlett Packard");
         System.out.println("Список всех ноутбуков:");
         printNotebooks(notebooks);
         filteredNotebooks = selectByFilter(filter);
