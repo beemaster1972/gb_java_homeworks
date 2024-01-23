@@ -109,16 +109,17 @@ public class Notebook {
     this.price = price;
   }
 
-  public boolean isFiltered(Filter filter){
+  public boolean isFiltered(Filter filter) {
     Map<Integer, String> mapFilter = filter.getFilter();
     boolean result = true;
     String parameter = "";
     int intParameter = 0;
-    if (filter.getFilter().size()==0) return result;
-    for (int i=1;i<10;i++){
-      if (mapFilter.containsKey(i)){
+    if (filter.getFilter().size() == 0)
+      return result;
+    for (int i = 1; i < 10; i++) {
+      if (mapFilter.containsKey(i)) {
         parameter = mapFilter.get(i);
-        switch (i){
+        switch (i) {
           case 1:
             result = result && this.manufacturer.toLowerCase().equals(parameter.toLowerCase());
             break;
@@ -146,7 +147,6 @@ public class Notebook {
           default:
             break;
         }
-
       }
     }
     return result;
@@ -172,8 +172,10 @@ public class Notebook {
   @Override
   public boolean equals(Object obj) {
     // TODO Auto-generated method stub
-    if (this == obj) return true;
-    if (obj == null || getClass() != obj.getClass()) return false;
+    if (this == obj)
+      return true;
+    if (obj == null || getClass() != obj.getClass())
+      return false;
     Notebook notebook = (Notebook) obj;
     return ramAmount == notebook.ramAmount
         && capacityHDD == notebook.capacityHDD

@@ -11,7 +11,8 @@ public class Filter {
         this.filter = filter;
     }
 
-    public Filter(){}
+    public Filter() {
+    }
 
     public Filter(String rawData) {
         String[] rawFilter = new String[14];
@@ -25,12 +26,11 @@ public class Filter {
                 num = Integer.parseInt(rawFilter[i]);
                 parameter = rawFilter[i + 1];
                 filter.put(num, parameter);
-
             }
         }
-
     }
-    public Map<Integer, String> getFilter(){
+
+    public Map<Integer, String> getFilter() {
         return filter;
     }
 
